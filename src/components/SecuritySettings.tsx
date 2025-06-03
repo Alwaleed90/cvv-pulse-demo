@@ -1,7 +1,8 @@
 
-import { ArrowLeft, Shield, Bell, Lock, Settings } from "lucide-react";
+import { ArrowLeft, Shield, Bell, Lock, Settings, LogOut } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
 import BottomNavigation from "@/components/BottomNavigation";
 
 interface SecuritySettingsProps {
@@ -9,6 +10,11 @@ interface SecuritySettingsProps {
 }
 
 const SecuritySettings = ({ onNavigate }: SecuritySettingsProps) => {
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    onNavigate("login");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* Header */}
@@ -118,6 +124,18 @@ const SecuritySettings = ({ onNavigate }: SecuritySettingsProps) => {
               </div>
             </Card>
           </div>
+        </div>
+
+        {/* Logout Button */}
+        <div className="pt-4">
+          <Button 
+            onClick={handleLogout}
+            variant="destructive"
+            className="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-semibold text-lg"
+          >
+            <LogOut className="w-5 h-5 mr-2" />
+            Logout
+          </Button>
         </div>
       </div>
 
